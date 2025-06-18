@@ -44,11 +44,11 @@ for idx, entry in enumerate(st.session_state.chat_history):
             selected_index = st.session_state.selected_top[1]
             result = entry["top3"][selected_index]
 
-            st.subheader(f"✅ {result['title']}")
+            st.markdown(f"#### 📜 **한줄 답변**\n {result['solution_summary']}")
             st.markdown(f"📌 **소관부처:** `{result['ministry']}`")
             st.markdown(f"📂 **담당부서:** `{result['department']}`")
             st.markdown(f"📞 **전화번호:** `{result['phone']}`")
-            st.markdown(f"📜 **GPT 한줄 답변 :** {result['solution_summary']}")
+            st.markdown(result["title"])
             with st.expander("📄 자세히 보기"):
                 st.markdown(result["solution_full"])
 
@@ -69,14 +69,14 @@ for idx, entry in enumerate(st.session_state.chat_history):
                 with col:
                     selected = (st.session_state.selected_top == (idx, i))
                     if selected:
-                        st.markdown(f"### ✅ {result['title']}")
+                        st.markdown(f"#### 📜 **한줄 답변**\n {result['solution_summary']}")
                         st.success("이 항목을 선택하셨습니다.")
                     else:
-                        st.subheader(result["title"])
+                        st.markdown(f"#### 📜 **한줄 답변**\n {result['solution_summary']}")
                     st.markdown(f"📌 **소관부처:** `{result['ministry']}`")
                     st.markdown(f"📂 **담당부서:** `{result['department']}`")
                     st.markdown(f"📞 **전화번호:** `{result['phone']}`")
-                    st.markdown(f"📜 **GPT 한줄 답변 :** {result['solution_summary']}")
+                    st.markdown(f"👩‍💻 **사무명:** {result["title"]}")
                     with st.expander("📄 자세히 보기"):
                         st.markdown(result["solution_full"])
                     if st.button(f"✔️ Top {i+1} 선택", key=f"select_{idx}_{i}"):
@@ -125,11 +125,11 @@ if query:
         cols = st.columns(3)
         for i, (col, result) in enumerate(zip(cols, top3_results)):
             with col:
-                st.subheader(result["title"])
+                st.markdown(f"#### 📜 **한줄 답변**\n {result['solution_summary']}")
                 st.markdown(f"📌 **소관부처:** `{result['ministry']}`")
                 st.markdown(f"📂 **담당부서:** `{result['department']}`")
                 st.markdown(f"📞 **전화번호:** `{result['phone']}`")
-                st.markdown(f"📜 **한줄 요약 :** {result['solution_summary']}")
+                st.markdown(f"👩‍💻 **사무명:** {result["title"]}")
                 with st.expander("📄 자세히 보기"):
                     st.markdown(result["solution_full"])
                 if st.button(f"✔️ Top {i+1} 선택", key=f"select_new_{i}"):
